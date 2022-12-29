@@ -1,6 +1,6 @@
 #include "top.h"
 void keyboard(){
-	const float step = 0.5f;
+	const float step = 2.0f;
 	const float y_angle = 0.001;
 	const float x_angle = 0.0005;
 	if(keys['W']){
@@ -21,7 +21,7 @@ void keyboard(){
 	if(keys['F']){
 		camera.moveUp(-step);
 	}
-	if(keys['Q']){
+	if(keys['T']){
 		camera.rotateY(y_angle);
 	}
 	if(keys['E']){
