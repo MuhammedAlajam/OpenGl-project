@@ -1,4 +1,4 @@
-# graphics project
+# Graphics Project
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/mysolutionsproject/graphics-project.git
+git remote add origin https://gitlab.com/bishertello/graphics-project.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/mysolutionsproject/graphics-project/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.com/bishertello/graphics-project/-/settings/integrations)
 
 ## Collaborate with your team
 
