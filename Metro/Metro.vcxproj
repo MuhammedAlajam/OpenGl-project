@@ -73,6 +73,7 @@
     <ClInclude Include="colors.h" />
     <ClInclude Include="complex.h" />
     <ClInclude Include="cube.h" />
+    <ClInclude Include="objects.h" />
     <ClInclude Include="perspective_cam.h" />
     <ClInclude Include="rect.h" />
     <ClInclude Include="setup_textures.h" />

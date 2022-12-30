@@ -20,6 +20,8 @@ Camera camera;
 int mouseX = 0, mouseY = 0;
 bool isClicked = 0, isRClicked = 0;
 
+
+
 HDC			hDC = NULL;		// Private GDI Device Context
 HGLRC		hRC = NULL;		// Permanent Rendering Cntext
 HWND		hWnd = NULL;		// Holds Our Window Handle
@@ -53,9 +55,8 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 
 	// Set the initial position and direction of the camera
-	camera.setPosition( 0, 100, 2000);
+	camera.setPosition( 0, 500, 2000);
 	camera.setDirection( 0.0f, 0.0f, -1.0f );
-
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
 	glClearDepth(1.0f);									// Depth Buffer Setup
@@ -64,6 +65,13 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
+
+
+	
+	
+
+
+
 
 	glEnable(GL_TEXTURE_2D);
 	Texture::LOAD_TEXTURES();
@@ -80,5 +88,6 @@ int shift = 1;
 int frames = 0;
 
 #include "basics.h"
+#include "objects.h"
 #include "carriages.h"
 #include "skybox.h"
