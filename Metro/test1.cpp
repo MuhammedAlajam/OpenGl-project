@@ -1,4 +1,5 @@
 #include "top.h"
+
 void keyboard(){
 	const float step = 0.5f;
 	const float y_angle = 0.001;
@@ -35,7 +36,11 @@ void keyboard(){
 	}
 }
 void chair();
-Driver_Carriage driver_carriage;
+void draw_chairs();
+void draw_chairs_column();
+void table();
+Passenger_Carriage pc;
+int x = 0;
 int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -43,42 +48,37 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 	keyboard();
 	camera.look();
 	glPushMatrix();
-	glTranslated(-2000,0,2000);
-	skybox();
+	glTranslated(0,0, -x);
+	Centered_Cube(4000,4000,4000).draw_textured(space);
 	glPopMatrix();
+	//skybox();
+	glPopMatrix();
+
 	int b[] = {front, brick, back, top,right , left};
 	//Centered_Cube(4000, 4000, 8000).draw_texturedS(b);
 	//skybox();
 	//glTranslated(1500, 500, -1000);
-	//glTranslated(2000, 100, -2000);
-	driver_carriage.draw();
-	glPushMatrix();
-	glTranslated(-100, 20, 0);
-	glScaled(0.8, 0.8, 0.8);
-	chair();
-	glTranslated(0, 0, 200);
-	glRotated(180, 0, 1, 0);
-	chair();
-	glPopMatrix();
-
+	//glTranslated(0, 0, 18000);
+	
+	//glTranslated(0,400,0);
+	//pc.draw();
+	//Centered_Cube(500, 500, 500).draw();
+	table();
 	frames++;
 	return 1;
 }
 
-void chair(){
-	glTranslated(0,40,0);
-	glPushMatrix();
-	glTranslated(0,0,-5);
-	Frustum(92.5*2,30,80, 4).draw_textured(cushion);
-	glPopMatrix();
-	Centered_Cube(105*2,-60,110).draw_textured(light_wood);
-	glPushMatrix();
-	glTranslated(0, 0, -40);
-	Centered_Cube(95*2, 120, -30).draw_textured(cushion);
-	glTranslated(0, -14, -24);
+void table(){
 	Color::show(WHITE);
-	Centered_Cube(105*2, 150, -18).draw_textured(light_wood);
+	glPushMatrix();
+	glRotated(90, 0, 1, 0);
+	Centered_Cube(40, 15, 250).draw_textured(grayish);
+	glRotated(90, 0, 1, 0);
+	Centered_Cube(40, 15, 250).draw_textured(grayish);
+	Color::show(BLACK);
+	Centered_Cube(40, 2.2*150, 40).draw();
 	glPopMatrix();
+	Color::show(WHITE);
 }
 
 #include "bottom.h"

@@ -359,7 +359,7 @@ int WINAPI WinMain(HINSTANCE	hInstance,			// Instance
 				KillGLWindow();						// Kill Our Current Window
 				fullscreen = !fullscreen;				// Toggle Fullscreen / Windowed Mode
 				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("OpenGL template", 640, 480, 16, fullscreen))
+				if (!CreateGLWindow("OpenGL template", 640, 480, 16, !fullscreen))
 				{
 					return 0;						// Quit If Window Was Not Created
 				}

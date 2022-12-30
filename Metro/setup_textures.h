@@ -1,4 +1,4 @@
-static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood;
+static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish;
 class Texture{
 public:
 
@@ -28,6 +28,8 @@ public:
 			("window_bottom_train.bmp",255);
 		cushion = LoadTexture("cushion.bmp", 255);
 		light_wood = LoadTexture("brick.bmp",255);
+		reflective_metal = LoadTexture("pleather.bmp", 255);
+		grayish = LoadTexture("grayish.bmp", 255);
 	}
 
 };
