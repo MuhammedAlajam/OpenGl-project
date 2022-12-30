@@ -63,16 +63,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="3DTexture.cpp" />
+    <ClCompile Include="heightMap.cpp" />
+    <ClCompile Include="math3d.cpp" />
+    <ClCompile Include="Model_3DS.cpp" />
     <ClCompile Include="test1.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="3DTexture.h" />
     <ClInclude Include="basics.h" />
     <ClInclude Include="bottom.h" />
     <ClInclude Include="carriages.h" />
     <ClInclude Include="colors.h" />
     <ClInclude Include="complex.h" />
     <ClInclude Include="cube.h" />
+    <ClInclude Include="heightMap.h" />
+    <ClInclude Include="math3d.h" />
+    <ClInclude Include="Model_3DS.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="perspective_cam.h" />
     <ClInclude Include="rect.h" />
@@ -80,6 +88,7 @@
     <ClInclude Include="skybox.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="texture.h" />
+    <ClInclude Include="TgaLoader.h" />
     <ClInclude Include="top.h" />
   </ItemGroup>
   <ItemGroup>

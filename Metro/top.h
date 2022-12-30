@@ -13,7 +13,9 @@
 #include <iostream> 
 #include <math.h>
 #include <random>
+#include "Model_3DS.h"
 #include "setup_textures.h"
+
 
 
 Camera camera;
@@ -50,6 +52,7 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 	glLoadIdentity();									// Reset The Modelview Matrix
 }
 
+
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 {
 
@@ -75,6 +78,9 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 	glEnable(GL_TEXTURE_2D);
 	Texture::LOAD_TEXTURES();
+	Texture::MAKE_MODELS();
+	
+	
 
 	return TRUE;										// Initialization Went OK
 }
