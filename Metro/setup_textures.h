@@ -1,4 +1,4 @@
-static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table;
+static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table, roof;
 
 
 
@@ -19,7 +19,7 @@ public:
 		right = LoadTexture("right.bmp",255);
 		one = LoadTexture("one.bmp",255);
 		two = LoadTexture("two.bmp",255);*/
-		floors = LoadTexture("floor.bmp",255);
+		floors = LoadTexture("floors.bmp",255);
 		front_train = LoadTexture("front_train.bmp",255);
 		back_train = LoadTexture("back_train.bmp",255);
 		train_ceiling = LoadTexture("train_ceiling.bmp",255);
@@ -34,6 +34,7 @@ public:
 		light_wood = LoadTexture("brick.bmp",255);
 		reflective_metal = LoadTexture("pleather.bmp", 255);
 		grayish = LoadTexture("grayish.bmp", 255);
+		roof = LoadTexture("roof.bmp",255);
 
 
 		lake_ground = LoadTexture("lake_ground.bmp");

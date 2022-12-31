@@ -276,7 +276,7 @@ void Model_3DS::Load(char *name)
 
 void Model_3DS::Draw()
 {
-	if (visible)
+	if (visible) 
 	{
 	glPushMatrix();
 

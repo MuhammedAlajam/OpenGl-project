@@ -4,7 +4,7 @@
 
 
 void keyboard(){
-	const float step = 1.0f;
+	const float step = 2.0f;
 	const float y_angle = 0.001;
 	const float x_angle = 0.0005;
 	canMove = true; 
@@ -79,75 +79,13 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 	draw_space();
 	glTranslated(0,30,0);
 	kc.draw();
-	glPushMatrix();
-	glScaled(1, 1.8,1);
-	table();
-	glPopMatrix();
-	draw_table_with_chairs();
+	
+
 
 	frames++;
 	return 1;
 }
-void draw_table_with_chairs(){
-	glPushMatrix();
-	draw_dinner_chairs();
-	glTranslated(-91, 0, 0);
-	glRotated(180, 0, 1, 0);
-	draw_dinner_chairs();
-	glPopMatrix();
-}
-void draw_dinner_chair(){
-	glPushMatrix();
-	glScaled(2, 1.6, 1);
-	dinner_chair->Draw();
-	glPopMatrix();
-}
-void draw_dinner_chairs(){
-	glPushMatrix();
-	glTranslated(-130, 100,-100);
-	draw_dinner_chair();
-	glTranslated(170, 0, 0);
-	draw_dinner_chair();
-	glPopMatrix();
-}
-void table(){
-	Color::show(WHITE);
-	glPushMatrix();
 
-	// CROSS BRACE
-	glRotated(90, 0, 1, 0);
-	Centered_Cube(12, 7.5, 60).draw_textured(grayish);
-	glRotated(90, 0, 1, 0);
-	Centered_Cube(12, 7.5, 60).draw_textured(grayish);
-
-	// SHAFT
-	Centered_Cube(10, 0.6*150, 10).draw_textured(grayish);
-
-
-	// transition to second pair
-	glTranslated(95, 0, 0);
-
-	// CROSS BRACE 2
-	glRotated(90, 0, 1, 0);
-	Centered_Cube(12, 7.5, 60).draw_textured(grayish);
-	glRotated(90, 0, 1, 0);
-	Centered_Cube(12, 7.5, 60).draw_textured(grayish);
-
-	// SHAFT 2
-	Centered_Cube(10, 0.6*150, 10).draw_textured(grayish);
-
-	// transition to MIDDLE and UP
-	glTranslated(95/2, 0.6*150 + 0, 0);
-
-	// TABLE TABLE
-	glColor4ub(175,175,175, 255);
-	Centered_Cube(300, 8, 200).draw_textured(dinner_table);
-	Color::show(WHITE);
-
-	// POP & EXIT
-	glPopMatrix();
-	Color::show(WHITE);
-}
 
 
 void draw_tree(){
