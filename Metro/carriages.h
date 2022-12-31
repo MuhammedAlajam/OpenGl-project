@@ -78,3 +78,11 @@ public:
 	}
 
 };
+
+class Kitchen_Carriage : public Basic_Carriage{
+public:
+	void draw(){
+		private_draw();
+		
+	}
+};

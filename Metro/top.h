@@ -6,7 +6,7 @@
 #include <cmath>
 #include <map>
 #include <tuple>
-#include <string> 
+#include <String> 
 #include <texture.h>
 #include "perspective_cam.h"
 #include "colors.h"
@@ -18,10 +18,11 @@
 
 
 
-Camera camera;
+Camera camera, virt_cam;
 int mouseX = 0, mouseY = 0;
 bool isClicked = 0, isRClicked = 0;
 
+bool canMove = false;
 
 
 HDC			hDC = NULL;		// Private GDI Device Context
@@ -60,6 +61,8 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	// Set the initial position and direction of the camera
 	camera.setPosition( 0, 500, 2000);
 	camera.setDirection( 0.0f, 0.0f, -1.0f );
+	virt_cam.setPosition( 0, 500, 2000);
+	virt_cam.setDirection( 0.0f, 0.0f, -1.0f );
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
 	glClearDepth(1.0f);									// Depth Buffer Setup
