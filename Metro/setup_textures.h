@@ -2,7 +2,8 @@ static int back, front, left, right, top, space, brick, one, two, floors, wood2,
 
 
 
-Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase;
+Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase, *chess_table;
+GLuint dinner_chair_list, flower_vase_list, chess_table_list;
 class Texture{
 public:
 
@@ -116,5 +117,46 @@ public:
 		flower_vase->Materials[4].tex = stem;
 		flower_vase->Materials[5].tex = blue;
 		flower_vase->scale = 0.1;
+
+		/*	LOAD CHESS TABLE	*/
+		GLTexture metal_s6, metalbla, marble;
+		metal_s6.LoadBMP("metal-s6.bmp");
+		metalbla.LoadBMP("metalbla.bmp");
+		marble.LoadBMP("marble.bmp");
+		chess_table = new Model_3DS();
+		chess_table->Load("chess_table.3ds");
+		chess_table->Materials[0].tex = marble;
+		chess_table->Materials[1].tex = metalbla;
+		chess_table->scale=0.8;
+		
+	}
+
+	static void MAKE_LISTS(){
+
+		/*	DINNER CHAIR LIST*/
+		dinner_chair_list = glGenLists(1);
+		glNewList(dinner_chair_list, GL_COMPILE);
+		glPushMatrix();
+		glScaled(2, 1.6, 1);
+		dinner_chair->Draw();
+		glPopMatrix();
+		glEndList();
+
+
+		/*	FLOWER VASE LIST	*/
+		flower_vase_list = glGenLists(1);
+		glNewList(flower_vase_list, GL_COMPILE);
+		flower_vase->scale= 2;
+		flower_vase->Draw();
+		glEndList();
+
+		/*	CHESS TABLE LIST*/
+		chess_table_list = glGenLists(1);
+		glNewList(chess_table_list, GL_COMPILE);
+		glTranslated(0, 110, 0);
+		chess_table->Draw();
+		glEndList();
+
+		/*	CHESS CHAIR LIST	*/
 	}
 };

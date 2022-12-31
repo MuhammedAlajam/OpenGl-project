@@ -10,7 +10,7 @@ public:
 	GLfloat delta_d, delta_h;
 	Basic_Carriage(){
 		height = 1000;
-		depth = 2000;
+		depth = 2600;
 		width = 800;
 		main_body = Centered_Cube(width, height, depth);
 
@@ -53,6 +53,7 @@ public:
 
 class Passenger_Carriage : public Basic_Carriage{
 public: 
+
 	void draw(){
 		glPushMatrix();
 		private_draw();
@@ -80,26 +81,29 @@ public:
 	}
 
 };
-
 class Kitchen_Carriage : public Basic_Carriage{
 public:
-	
 	void draw(){
 		private_draw();
 
 		glPushMatrix();
-		glTranslated(-200, 0,0);
+		glTranslated(-180, 0,0);
 		glPushMatrix();
-		glTranslated(0,0, 500);
+		glTranslated(0,0, 1100);
 		draw_table_with_chairs();
 		glTranslated(0,0, -600);
 		draw_table_with_chairs();
 		glTranslated(0,0, -500);
 		draw_table_with_chairs();
+		glTranslated(0,0, -500);
+		draw_table_with_chairs();
+		glTranslated(0,0, -500);
+		draw_table_with_chairs();
 		glPopMatrix();
 		glPopMatrix();
+
 	}
-	void draw_table_with_chairs(){
+	 void draw_table_with_chairs(){
 		glPushMatrix();
 		draw_dinner_chairs();
 		glTranslated(-91, 0, 0);
@@ -112,25 +116,19 @@ public:
 		glPopMatrix();
 		glPushMatrix();
 		glTranslated(-50,1.15*150,0);
-		flower_vase->scale= 2;
-		flower_vase->Draw();
+		glCallList(flower_vase_list);
 		glPopMatrix();
 	}
-	void draw_dinner_chair(){
-		glPushMatrix();
-		glScaled(2, 1.6, 1);
-		dinner_chair->Draw();
-		glPopMatrix();
-	}
-	void draw_dinner_chairs(){
+	
+	 void draw_dinner_chairs(){
 		glPushMatrix();
 		glTranslated(-130, 100,-100);
-		draw_dinner_chair();
+		glCallList(dinner_chair_list);
 		glTranslated(170, 0, 0);
-		draw_dinner_chair();
+		glCallList(dinner_chair_list);
 		glPopMatrix();
 	}
-	void table(){
+	 void table(){
 		Color::show(WHITE);
 		glPushMatrix();
 
@@ -168,4 +166,61 @@ public:
 		glPopMatrix();
 		Color::show(WHITE);
 	}
+};
+
+class Chess_Carriage : public Basic_Carriage{
+public:
+	void draw(){
+
+		private_draw();
+		glPushMatrix();
+		glTranslated(-180,23,600);
+		glCallList(chess_table_list);
+
+		glPushMatrix();
+		
+		glTranslated(0, 120, 0);
+		glScaled(0.05, 0.05, 0.05);
+		draw_chessboard();
+		
+		glPopMatrix();
+		
+		glPopMatrix();
+
+	}
+	void draw_chessboard(){
+
+		//CHESS BOARD BASE
+		Color::show(WHITE);
+		Centered_Cube(4000, 200, 4000).draw_textured(wood2);
+		glTranslated(0.0, 150, 0.0);
+
+		//CHESS BOARD FRUSTUM
+		Color::show(WHITE);
+		Frustum(4000, 450, 4000, 500).draw_textured(wood2);
+		glTranslated(0.0, 450, 0.0);
+		Color::show(WHITE);
+		int a[6] = {NULL, NULL, NULL, chess, NULL, NULL};
+		Centered_Cube(2800, 80, 2800).draw_texturedS(a);
+
+		//CHESS BOARD EDGE
+		glPushMatrix();
+		glTranslated(-1500, 0, -1400);
+		Cube(100, 80, 2800).draw_textured(wood);
+		glRotated(90, 0, 1, 0);
+		Cube(100, 80, 3000).draw_textured(wood);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(1400, 0, -1400);
+		Cube(100, 80, 2800).draw_textured(wood);
+		glTranslated(100, 0, 2800);
+		glRotated(-90, 0, 1, 0);
+		Cube(100, 80, 3000).draw_textured(wood);
+		glPopMatrix();
+		glTranslated(0, -650, 0);
+		glTranslated(-1400+(175), 740, -1400+(175));
+		Color::show(WHITE);
+	}
+	
 };

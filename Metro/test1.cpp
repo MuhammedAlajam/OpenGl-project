@@ -1,12 +1,12 @@
 #include "top.h"
 
 
-
+const float step =2.0f;
+const float y_angle = 0.001;
+const float x_angle = 0.0005;
 
 void keyboard(){
-	const float step = 2.0f;
-	const float y_angle = 0.001;
-	const float x_angle = 0.0005;
+
 	canMove = true; 
 	/* set new virtual cam position to actual cam position */
 	virt_cam.m_position = camera.m_position;
@@ -62,7 +62,7 @@ void draw_space(){
 	box.draw_textured(space);
 	glPopMatrix();
 }
-
+Chess_Carriage cc;
 int x = 0;
 int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 {
@@ -75,12 +75,10 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 	}
 	camera.look();
 	keyboard(); 
-
 	draw_space();
-	glTranslated(0,30,0);
-	kc.draw();
-	
 
+	glTranslated(0, 20,0);
+	kc.draw();
 
 	frames++;
 	return 1;

@@ -6,7 +6,7 @@
 #include <cmath>
 #include <map>
 #include <tuple>
-#include <String> 
+#include <string.h> 
 #include <texture.h>
 #include "perspective_cam.h"
 #include "colors.h"
@@ -78,12 +78,13 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 
 
-
+	/*	setup textures	*/
 	glEnable(GL_TEXTURE_2D);
 	Texture::LOAD_TEXTURES();
 	Texture::MAKE_MODELS();
-	
-	
+
+	/*	setup lists	*/
+	Texture::MAKE_LISTS();
 
 	return TRUE;										// Initialization Went OK
 }
