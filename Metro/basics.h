@@ -31,6 +31,26 @@ public:
 	}
 };
 
+
+bool betweenTwoPoints(GLfloat x1, GLfloat x2, GLfloat x)
+{
+	// TODO flip 
+	GLfloat dif = 100; 
+
+	if(x <= (max(x1, x2) - dif) && x >= (min(x1, x2)) + dif) return true; 
+	return false; 
+}
+
+bool find_point(Point p1, Point p2, Point p3, Point p4, Point p)
+{
+	if(betweenTwoPoints(p1.x, p3.x, p.x) && betweenTwoPoints(p2.z, p4.z, p.z))
+			return true; 
+ 
+    return false;
+}
+
+
+
 class Rect : public entity{
 public:
 	// Method to draw the rectangle using legacy OpenGL
@@ -40,15 +60,15 @@ public:
 	Rect(Point p1_= Point(0,0,0),Point  p2_= Point(1, 0, 0), Point p3_= Point(1,1,0),Point p4_= Point(0, 1, 0)):
 		p1(p1_), p2(p2_), p3(p3_), p4(p4_){}
 	                                                  
-	void draw() const {
+	void draw()  {
 		glBegin(GL_QUADS);
 		p1.show();
 		p2.show();
 		p3.show();
 		p4.show();
 		glEnd();}
-
 	void draw_textured(int texture) {
+
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glBegin(GL_QUADS);
 		glTexCoord2d(0.0, 0.0);
@@ -60,6 +80,16 @@ public:
 		glTexCoord2d(0.0, 1.0);
 		p4.draw();
 		glEnd();
+	}
+
+	void checkMove()
+	{
+		Point camera_point = Point(camera.m_position.x, camera.m_position.y, camera.m_position.z); 
+		Point virt_camera_point = Point(virt_cam.m_position.x, virt_cam.m_position.y, virt_cam.m_position.z); 
+
+
+		if(find_point(p1, p2, p3, p4, camera_point) != find_point(p1, p2, p3, p4, virt_camera_point))
+			canMove = false; 
 	}
 };
 
@@ -97,6 +127,7 @@ public:
 
 	Rect get_front_face() const{return Rect(p[0],p[1],p[2],p[3]);} // 0
 
+ 
 	Rect get_bottom_face() const{return Rect(p[0],p[1],p[5],p[4]);} //1
 
 	Rect get_deep_face() const{return Rect(p[4],p[5],p[6],p[7]);} //2
@@ -123,7 +154,6 @@ public:
 	void draw() const{
 
 		Rect front_face = get_front_face(); // 0 
-
 		Rect bottom_face = get_bottom_face(); // 1
 
 		Rect deep_face = get_deep_face(); // 2
@@ -159,11 +189,14 @@ public:
 
 
 	}
-
+	/*	HERE	*/
 	void draw_textured(int texture){
 		std::vector<Rect> rects = get_all();
 		for(int i =0; i < rects.size(); i++)
+		{
+			
 			rects[i].draw_textured(texture);
+		}
 
 	}
 	
@@ -243,26 +276,17 @@ public:
 		Rect left_face = get_left_face(); //5
 
 
-		//glColor3f(1.0, 0.0, 0.0);
 
 		front_face.draw();
 
-		//glColor3f(0.0, 0.0, 0.0);
 		bottom_face.draw();
 
-		//glColor3f(0.0, 0.0, 0.0);
 		deep_face.draw();
-
-		//glColor3ub(230, 230, 250);
-		//glColor3ub(159, 43, 104);
 
 		top_face.draw();
 
-		//glColor3f(0.0, 1.0, 0.0);
-		//glColor3ub(255,228,196);
 		right_face.draw();
 
-		//glColor3f(0.0, 0.0, 1.0);
 		left_face.draw();
 
 		
@@ -286,8 +310,9 @@ public:
 
 		front_face.draw_textured(texture);
 
-		//glColor3f(0.0, 0.0, 0.0);
+		bottom_face.checkMove(); 
 		bottom_face.draw_textured(texture);
+
 
 		//glColor3f(0.0, 0.0, 0.0);
 		deep_face.draw_textured(texture);
