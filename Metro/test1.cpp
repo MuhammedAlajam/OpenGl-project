@@ -57,28 +57,29 @@ Passenger_Carriage pc;
 Kitchen_Carriage kc;
 Centered_Cube box = Centered_Cube(4000,4000,pc.depth*11);
 void draw_space(){
-	glPushMatrix();
-	glTranslated(0, 0, -((pc.depth*11)/2)+pc.depth*1.8);
+	ac.push_matrix(); 
+	ac.translate(0, 0, -((pc.depth*11)/2)+pc.depth*1.8);
 	box.draw_textured(space);
-	glPopMatrix();
+	ac.pop_matrix();
 }
 Chess_Carriage cc;
 int x = 0;
 int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 {
-	glClear(GL_COLOR_BUFFER_BIT |				         GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+	ac.init(); 
 
-	if(canMove || true){
+	if(canMove || keys['P']){
 		camera.m_position = virt_cam.m_position; 
 		camera.m_direction = virt_cam.m_direction;
 	}
 	camera.look();
 	keyboard(); 
 	draw_space();
-
-	glTranslated(0, 20,0);
-	kc.draw();
+	pc.draw(); 
+	ac.translate(0, 2000,0);
+	pc.draw();
 
 	frames++;
 	return 1;
@@ -91,20 +92,20 @@ void draw_tree(){
 	tree->pos.y = 0;
 	tree->pos.z = 0;
 	//palm_tree->scale=0.4;	
-	glPushMatrix();
-	glTranslated(0, 350, 0);
+	ac.push_matrix();
+	ac.translate(0, 350, 0);
 	glRotated(-90,1, 0,0);
 	tree->Draw();
-	glPopMatrix();
+	ac.pop_matrix();
 }
 
 
 //Centered_Cube(4000, 4000, 8000).draw_texturedS(b);
 //skybox();
-//glTranslated(1500, 500, -1000);
-//glTranslated(0, 0, 18000);
+//ac.translate(1500, 500, -1000);
+//ac.translate(0, 0, 18000);
 
-//glTranslated(0,400,0);
+//ac.translate(0,400,0);
 //pc.draw();
 //Centered_Cube(500, 500, 500).draw();
 

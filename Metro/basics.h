@@ -32,21 +32,16 @@ public:
 };
 
 
-bool betweenTwoPoints(GLfloat x1, GLfloat x2, GLfloat x)
+bool betweenTwoPoints(GLfloat x1, GLfloat x2, GLfloat x, GLfloat add)
 {
-	// TODO flip 
-	GLfloat dif = 100; 
-
-	if(x <= (max(x1, x2) - dif) && x >= (min(x1, x2)) + dif) return true; 
-	return false; 
+	GLfloat dif = 5; 
+	if(max(abs(x1 - (x - add)), abs(x2 - (x - add))) < dif) canMove = false; 
+	return ((x - add) <= max(x1, x2) && (x - add) >= min(x1, x2));
 }
 
 bool find_point(Point p1, Point p2, Point p3, Point p4, Point p)
 {
-	if(betweenTwoPoints(p1.x, p3.x, p.x) && betweenTwoPoints(p2.z, p4.z, p.z))
-			return true; 
- 
-    return false;
+	return (betweenTwoPoints(p1.x, p3.x, p.x, ac.x) && betweenTwoPoints(p2.z, p4.z, p.z, ac.z));
 }
 
 

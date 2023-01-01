@@ -3,6 +3,7 @@
 #include <glu.h>			// Header File For The GLu32 Library
 #include <glaux.h>		// Header File For The Glaux Library
 #include <vector>
+#include <stack>
 #include <cmath>
 #include <map>
 #include <tuple>
@@ -15,13 +16,13 @@
 #include <random>
 #include "Model_3DS.h"
 #include "setup_textures.h"
-
+#include "Axis_control.h"
 
 
 Camera camera, virt_cam;
 int mouseX = 0, mouseY = 0;
 bool isClicked = 0, isRClicked = 0;
-
+AxisControl ac = AxisControl(); 
 bool canMove = false;
 
 
