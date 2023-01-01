@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DTexture.h" />
+    <ClInclude Include="Axis_control.h" />
     <ClInclude Include="basics.h" />
     <ClInclude Include="bottom.h" />
     <ClInclude Include="carriages.h" />

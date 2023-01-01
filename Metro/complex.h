@@ -12,11 +12,11 @@ public:
 
 	void draw(){
 		Rect a_rect = a.get_top_face();
-		glPushMatrix();
+		ac.push_matrix();
 		
 		Rect b_rect = b.get_bottom_face();
 		b_rect.draw();
-		glPopMatrix();
+		ac.pop_matrix();
 		//glColor3f(1.0, 1.0, 1.0);
 		a_rect.draw(); 
 

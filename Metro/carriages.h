@@ -30,23 +30,23 @@ public:
 		draw_sides();
 	}
 	void draw_sides(){
-		glPushMatrix();
+		ac.push_matrix();
 		Centered_Cube stamp(width, 3*height/12, depth);
 		stamp.get_left_face().draw_textured(window_bottom_train);
 		stamp.get_right_face().draw_textured(window_bottom_train);
-		glTranslated(0, height/4, 0);
+		ac.translate(0, height/4, 0);
 		stamp = Centered_Cube(width, 5*height/12, depth);
 		glColor4ub(0, 0, 60, 102);
 		stamp.get_left_face().draw();
 		stamp.get_right_face().draw();
-		glTranslated(0, 5*height/12, 0);
+		ac.translate(0, 5*height/12, 0);
 		Color::show(WHITE);
 		stamp = Centered_Cube(width, 4*height/12, depth);
 		stamp.get_left_face().draw_textured(window_top_train);
 		stamp.get_right_face().draw_textured(window_top_train);
 		glColor4ub(0,0,0, 175);
 		Color::show(WHITE);
-		glPopMatrix();
+		ac.pop_matrix();
 	}
 
 };
@@ -55,22 +55,23 @@ class Passenger_Carriage : public Basic_Carriage{
 public: 
 
 	void draw(){
-		glPushMatrix();
+		ac.push_matrix();
 		private_draw();
 		draw_chairs_column();
-		glTranslated(500, 0, 0);
+		ac.translate(500, 0, 0);
 		draw_chairs_column();
-		glTranslated(-500, 998, 0);
+		ac.translate(-500, 998, 0);
 		glColor4ub(0,0,60, 100);
 		Centered_Cube(10*width/12, 1, depth - (depth/4)).draw();
-		glTranslated(0, 1, 0);
+		ac.translate(0, 1, 0);
 		glColor4ub(49, 48, 51, 255);
 		Centered_Cube(width, 1, depth).get_top_face().draw();
 		Color::show(WHITE);
-		glPopMatrix();
+		ac.pop_matrix();
 	}
 	void private_draw(){
 		Color::show(WHITE);
+		main_body.get_bottom_face().checkMove(); 
 		main_body.get_bottom_face().draw_textured(floors);
 		main_body.get_deep_face().draw_textured(front_train);
 		main_body.get_front_face().draw_textured(front_train);
@@ -86,51 +87,51 @@ public:
 	void draw(){
 		private_draw();
 
-		glPushMatrix();
-		glTranslated(-180, 0,0);
-		glPushMatrix();
-		glTranslated(0,0, 1100);
+		ac.push_matrix();
+		ac.translate(-180, 0,0);
+		ac.push_matrix();
+		ac.translate(0,0, 1100);
 		draw_table_with_chairs();
-		glTranslated(0,0, -600);
+		ac.translate(0,0, -600);
 		draw_table_with_chairs();
-		glTranslated(0,0, -500);
+		ac.translate(0,0, -500);
 		draw_table_with_chairs();
-		glTranslated(0,0, -500);
+		ac.translate(0,0, -500);
 		draw_table_with_chairs();
-		glTranslated(0,0, -500);
+		ac.translate(0,0, -500);
 		draw_table_with_chairs();
-		glPopMatrix();
-		glPopMatrix();
+		ac.pop_matrix();
+		ac.pop_matrix();
 
 	}
 	 void draw_table_with_chairs(){
-		glPushMatrix();
+		ac.push_matrix();
 		draw_dinner_chairs();
-		glTranslated(-91, 0, 0);
+		ac.translate(-91, 0, 0);
 		glRotated(180, 0, 1, 0);
 		draw_dinner_chairs();
-		glPopMatrix();
-		glPushMatrix();
+		ac.pop_matrix();
+		ac.push_matrix();
 		glScaled(1, 1.8,1);
 		table();
-		glPopMatrix();
-		glPushMatrix();
-		glTranslated(-50,1.15*150,0);
+		ac.pop_matrix();
+		ac.push_matrix();
+		ac.translate(-50,1.15*150,0);
 		glCallList(flower_vase_list);
-		glPopMatrix();
+		ac.pop_matrix();
 	}
 	
 	 void draw_dinner_chairs(){
-		glPushMatrix();
-		glTranslated(-130, 100,-100);
+		ac.push_matrix();
+		ac.translate(-130, 100,-100);
 		glCallList(dinner_chair_list);
-		glTranslated(170, 0, 0);
+		ac.translate(170, 0, 0);
 		glCallList(dinner_chair_list);
-		glPopMatrix();
+		ac.pop_matrix();
 	}
 	 void table(){
 		Color::show(WHITE);
-		glPushMatrix();
+		ac.push_matrix();
 
 		// CROSS BRACE
 		glRotated(90, 0, 1, 0);
@@ -143,7 +144,7 @@ public:
 
 
 		// transition to second pair
-		glTranslated(95, 0, 0);
+		ac.translate(95, 0, 0);
 
 		// CROSS BRACE 2
 		glRotated(90, 0, 1, 0);
@@ -155,7 +156,7 @@ public:
 		Centered_Cube(10, 0.6*150, 10).draw_textured(grayish);
 
 		// transition to MIDDLE and UP
-		glTranslated(95/2, 0.6*150 + 0, 0);
+		ac.translate(95/2, 0.6*150 + 0, 0);
 
 		// TABLE TABLE
 		glColor4ub(175,175,175, 255);
@@ -163,7 +164,7 @@ public:
 		Color::show(WHITE);
 
 		// POP & EXIT
-		glPopMatrix();
+		ac.pop_matrix();
 		Color::show(WHITE);
 	}
 };
@@ -173,19 +174,19 @@ public:
 	void draw(){
 
 		private_draw();
-		glPushMatrix();
-		glTranslated(-180,23,600);
+		ac.push_matrix();
+		ac.translate(-180,23,600);
 		glCallList(chess_table_list);
 
-		glPushMatrix();
+		ac.push_matrix();
 		
-		glTranslated(0, 120, 0);
+		ac.translate(0, 120, 0);
 		glScaled(0.05, 0.05, 0.05);
 		draw_chessboard();
 		
-		glPopMatrix();
+		ac.pop_matrix();
 		
-		glPopMatrix();
+		ac.pop_matrix();
 
 	}
 	void draw_chessboard(){
@@ -193,33 +194,33 @@ public:
 		//CHESS BOARD BASE
 		Color::show(WHITE);
 		Centered_Cube(4000, 200, 4000).draw_textured(wood2);
-		glTranslated(0.0, 150, 0.0);
+		ac.translate(0.0, 150, 0.0);
 
 		//CHESS BOARD FRUSTUM
 		Color::show(WHITE);
 		Frustum(4000, 450, 4000, 500).draw_textured(wood2);
-		glTranslated(0.0, 450, 0.0);
+		ac.translate(0.0, 450, 0.0);
 		Color::show(WHITE);
 		int a[6] = {NULL, NULL, NULL, chess, NULL, NULL};
 		Centered_Cube(2800, 80, 2800).draw_texturedS(a);
 
 		//CHESS BOARD EDGE
-		glPushMatrix();
-		glTranslated(-1500, 0, -1400);
+		ac.push_matrix();
+		ac.translate(-1500, 0, -1400);
 		Cube(100, 80, 2800).draw_textured(wood);
 		glRotated(90, 0, 1, 0);
 		Cube(100, 80, 3000).draw_textured(wood);
-		glPopMatrix();
+		ac.pop_matrix();
 
-		glPushMatrix();
-		glTranslated(1400, 0, -1400);
+		ac.push_matrix();
+		ac.translate(1400, 0, -1400);
 		Cube(100, 80, 2800).draw_textured(wood);
-		glTranslated(100, 0, 2800);
+		ac.translate(100, 0, 2800);
 		glRotated(-90, 0, 1, 0);
 		Cube(100, 80, 3000).draw_textured(wood);
-		glPopMatrix();
-		glTranslated(0, -650, 0);
-		glTranslated(-1400+(175), 740, -1400+(175));
+		ac.pop_matrix();
+		ac.translate(0, -650, 0);
+		ac.translate(-1400+(175), 740, -1400+(175));
 		Color::show(WHITE);
 	}
 	

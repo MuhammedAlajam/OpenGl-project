@@ -1,42 +1,42 @@
 ﻿void chair(){
-	glTranslated(0,40,0);
-	glPushMatrix();
-	glTranslated(0,0,-5);
+	ac.translate(0,40,0);
+	ac.push_matrix();
+	ac.translate(0,0,-5);
 	Frustum(92.5*2,30,80, 4).draw_textured(cushion);
-	glPopMatrix();
+	ac.pop_matrix();
 	Centered_Cube(105*2,-48,110).draw_textured(reflective_metal);
-	glPushMatrix();
-	glTranslated(0, 0, -40);
+	ac.push_matrix();
+	ac.translate(0, 0, -40);
 	Centered_Cube(95*2, 120, -30).draw_textured(cushion);
-	glTranslated(0, -14, -24);
+	ac.translate(0, -14, -24);
 	Color::show(WHITE);
 	Centered_Cube(105*2, 150, -18).draw_textured(reflective_metal);
-	glPopMatrix();
+	ac.pop_matrix();
 }
 void draw_chairs(){
-	glPushMatrix();
-	glTranslated(-250, 20, 0);
+	ac.push_matrix();
+	ac.translate(-250, 20, 0);
 
-	glPushMatrix();
+	ac.push_matrix();
 	glScaled(1.4, 2.2, 1.4);
 	chair();
-	glPopMatrix();
+	ac.pop_matrix();
 
-	glTranslated(0, 0, 400);
+	ac.translate(0, 0, 400);
 	glRotated(180, 0, 1, 0);
-	glPushMatrix();
+	ac.push_matrix();
 	glScaled(1.4, 2.2, 1.4);
 	chair();
-	glPopMatrix();
-	glPopMatrix();
+	ac.pop_matrix();
+	ac.pop_matrix();
 }
 void draw_chairs_column(){
-	glPushMatrix();
-	glTranslated(0, 0,400);
+	ac.push_matrix();
+	ac.translate(0, 0,400);
 	draw_chairs();
-	glTranslated(0, 0,-600);
+	ac.translate(0, 0,-600);
 	draw_chairs();
-	glTranslated(0, 0,-600);
+	ac.translate(0, 0,-600);
 	draw_chairs();
-	glPopMatrix();
+	ac.pop_matrix();
 }
