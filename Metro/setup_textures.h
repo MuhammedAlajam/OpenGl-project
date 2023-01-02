@@ -1,9 +1,12 @@
 static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table, roof;
 
 
+// DEFINE MODELS
+Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase, *chess_table, *man, *chess_clock, *chess_chair, *end_table, *figurine, *plate;
 
-Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase, *chess_table, *man;
-GLuint dinner_chair_list, flower_vase_list, chess_table_list, man_list, space_box_list, basic_carriage_list, dinner_chairs_list, draw_table_with_chairs_list, chess_board_list;
+// DEFINE LISTS
+GLuint dinner_chair_list, flower_vase_list, chess_table_list, man_list, space_box_list, basic_carriage_list, dinner_chairs_list, draw_table_with_chairs_list, chess_board_list, chess_chairs_list, chess_clock_list, end_table_list, figurine_list, plate_list;
+
 class Texture{
 public:
 
@@ -46,9 +49,8 @@ public:
 		dinner_table = LoadTexture("dinner_table.bmp");
 	}
 
-
 	static void MAKE_MODELS(){
-		
+
 
 		/*	LOAD PINE TREE	*/
 		GLTexture leaf, woods;
@@ -128,7 +130,7 @@ public:
 		chess_table->Materials[0].tex = marble;
 		chess_table->Materials[1].tex = metalbla;
 		chess_table->scale=0.8;
-		
+
 
 		/*	LOAD MAN	*/
 		GLTexture bag, character;
@@ -139,8 +141,63 @@ public:
 		man->Materials[2].tex = bag;
 		man->Materials[1].tex = character;
 		man->scale = 7;
-		
-	}
+
+		/*	LOAD CHESS CLOCK	*/
+		GLTexture chess_clock_face, chess_clock_wood;
+		chess_clock_face.LoadBMP("chess_clock_face.bmp");
+		chess_clock_wood.LoadBMP("chess_clock_wood.bmp");
+		chess_clock = new Model_3DS();
+		chess_clock->Load("chess_clock.3DS");
+		chess_clock->Materials[0].tex = chess_clock_face;
+		chess_clock->Materials[1].tex = chess_clock_face;
+		chess_clock->Materials[2].tex = chess_clock_face;
+		chess_clock->Materials[4].tex = chess_clock_face;
+		//zis work
+		chess_clock->Materials[3].tex = chess_clock_wood;
+		chess_clock->scale=3.5;
+		chess_clock->rot.y = 180;
+
+		/*	LOAD CHESS CHAIR	*/
+		GLTexture chess_chair_wood, chess_chair_leather;
+		chess_chair_wood.Load("chess_chair_wood.bmp");
+		chess_chair_wood.Load("chess_chair_leather.bmp");
+		chess_chair = new Model_3DS();
+		chess_chair->Load("chess_chair.3ds");
+		chess_chair->Materials[0].tex = chess_chair_wood;
+		chess_chair->Materials[1].tex = chess_chair_leather;
+		chess_chair->scale = 0.4;
+		chess_chair->rot.x = 0;
+
+		/*	LOAD END TABLE	*/
+		GLTexture end_table_wood, end_table_metal;
+		end_table_wood.LoadBMP("end_table/end_table_wood.bmp");
+		end_table_metal.LoadBMP("end_table/end_table_metal.bmp");
+		end_table = new Model_3DS();
+		end_table->Load("end_table/end_table.3ds");
+		end_table->Materials[0].tex = end_table_wood;
+		end_table->Materials[1].tex = end_table_metal;
+		end_table->scale = 4.5;
+
+		/*	LOAD FIGURINE	*/
+		GLTexture figurine_metal2, figurine_metal;
+		figurine = new Model_3DS();
+		figurine_metal2.LoadBMP("figurine/figurine_metal2.bmp");
+		figurine_metal.LoadBMP("figurine/figurine_metal.bmp");
+		figurine->Load("figurine/figurine.3ds");
+		figurine->scale=0.2;
+		figurine->Materials[0].tex = figurine_metal;
+		figurine->Materials[1].tex = figurine_metal;
+
+		/*	LOAD DECO PLATE	*/
+		GLTexture plate_basket, plate_wood;
+		plate_basket.LoadBMP("plate/plate_basket2.bmp");
+		plate_wood.LoadBMP("plate/plate_wood.bmp");
+		plate = new Model_3DS();
+		plate->Load("plate/plate.3ds");
+		plate->scale = 6;
+		plate->Materials[0].tex = plate_wood;
+		plate->Materials[1].tex = plate_basket;
+}
 
 	static void MAKE_LISTS(){
 
@@ -207,7 +264,7 @@ public:
 		dinner_chair->Draw();
 		glPopMatrix();		glPopMatrix();
 		glEndList();
-		
+
 
 		/*	draw_table_with_chairs_list	*/
 		draw_table_with_chairs_list = glGenLists(1);
@@ -301,6 +358,47 @@ public:
 		glTranslated(-1400+(175), 740, -1400+(175));
 		Color::show(WHITE);
 		glEndList();
-	}
 
+		/*	CHESS CHAIR LIST	*/
+		chess_chairs_list = glGenLists(1);
+		glNewList(chess_chairs_list, GL_COMPILE);
+		glPushMatrix();
+		glTranslated(-0, 200, 0);
+		chess_chair->Draw();
+		glTranslated(-0, 0, 700);
+		glRotated(180, 0, 1, 0);
+		chess_chair->Draw();
+		glPopMatrix();
+		glEndList();
+
+		/*	CHESS CLOCK LIST	*/
+		chess_clock_list = glGenLists(1);
+		glNewList(chess_clock_list, GL_COMPILE);
+		chess_clock->Draw();
+		glEndList();
+
+		/*	END TABLE LIST	*/
+		end_table_list = glGenLists(1);
+		glNewList(end_table_list, GL_COMPILE);
+		glPushMatrix();
+		glTranslated(0, 110, 0);
+		end_table->Draw();
+		glPopMatrix();
+		glEndList();
+
+		/*	FIGURINE LIST	*/
+		figurine_list = glGenLists(1);
+		glNewList(figurine_list, GL_COMPILE);
+		glRotated(90, 0, 1,0);
+		figurine->Draw();
+		glEndList();
+
+		/*	PLATE LIST	*/
+		plate_list = glGenLists(1);
+		glNewList(plate_list, GL_COMPILE);
+			glRotated(70,0,1,0);
+			plate->Draw();
+		glEndList();
+	}
 };
+

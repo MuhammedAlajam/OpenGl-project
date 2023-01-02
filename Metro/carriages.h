@@ -135,22 +135,76 @@ public:
 
 class Chess_Carriage : public Basic_Carriage{
 public:
+	Centered_Cube chess_table_hitbox, chess_chair_hitbox, end_table_hitbox;
+
+	Chess_Carriage(){
+		chess_table_hitbox = Centered_Cube(400,400,400);
+		chess_chair_hitbox = Centered_Cube(340, 200, 320);
+		end_table_hitbox = Centered_Cube(220, 300, 220);
+	}
+	
 	void draw(){
 
 		private_draw();
 		ac.push_matrix();
-		ac.translate(-180,23,600);
+		ac.translate(-180,23,0);
 		glCallList(chess_table_list);
 		glColor4ub(255, 0, 0, 150);
-		Centered_Cube(400,400,400).hitbox();
+		chess_table_hitbox.hitbox();
+
 		Color::show(WHITE);
+
 		ac.push_matrix();
 		ac.translate(0, 120, 0);
 		glScaled(0.05, 0.05, 0.05);
 		draw_chessboard();
+		ac.pop_matrix();
+
+		ac.translate(140, 120, 0);
+		Color::show(WHITE);
+		glCallList(chess_clock_list);
+
+
+		ac.pop_matrix();
+
+
+		// draw chairs
+		ac.push_matrix();
+		glScaled(0.9, 1,1);
+		ac.translate(-180,23,-350);
+		glCallList(chess_chairs_list);
+
+		// create chair hitboxes
+		ac.translate(0,0 , 0);
+		chess_chair_hitbox.hitbox();
+
+		ac.translate(-0, 0, 700);
+		chess_chair_hitbox.hitbox();
+		ac.pop_matrix();
+
+		// draw end table one
+		ac.push_matrix();
+		ac.translate(-180, 0, 900);
+		end_table_hitbox.hitbox();
+		glCallList(end_table_list);
+		ac.translate(0, 310, 5);
+
+		// figurine deco
+		glCallList(figurine_list);
+		
 		
 		ac.pop_matrix();
+
+		// draw end table two
+		ac.push_matrix();
+		ac.translate(-180, 0, -950);
+		end_table_hitbox.hitbox();
+		glCallList(end_table_list);
+		ac.translate(0, 310, 5);
 		
+		// plate for deco
+		glCallList(plate_list);
+
 		ac.pop_matrix();
 
 	}
