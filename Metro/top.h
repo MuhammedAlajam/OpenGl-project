@@ -15,15 +15,22 @@
 #include <math.h>
 #include <random>
 #include "Model_3DS.h"
-#include "setup_textures.h"
 #include "Axis_control.h"
+#include "sound.h"
 
-
-Camera camera, virt_cam;
+Camera camera, virt_cam, third_cam;
 int mouseX = 0, mouseY = 0;
 bool isClicked = 0, isRClicked = 0;
 AxisControl ac = AxisControl(); 
 bool canMove = false;
+
+
+#include "basics.h"
+#include "setup_textures.h"
+
+
+
+
 
 
 HDC			hDC = NULL;		// Private GDI Device Context
@@ -98,7 +105,7 @@ int shift = 1;
 
 int frames = 0;
 
-#include "basics.h"
+
 #include "objects.h"
 #include "carriages.h"
 #include "skybox.h"

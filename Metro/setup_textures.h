@@ -2,8 +2,8 @@ static int back, front, left, right, top, space, brick, one, two, floors, wood2,
 
 
 
-Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase, *chess_table;
-GLuint dinner_chair_list, flower_vase_list, chess_table_list;
+Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase, *chess_table, *man;
+GLuint dinner_chair_list, flower_vase_list, chess_table_list, man_list, space_box_list, basic_carriage_list, dinner_chairs_list, draw_table_with_chairs_list, chess_board_list;
 class Texture{
 public:
 
@@ -129,6 +129,17 @@ public:
 		chess_table->Materials[1].tex = metalbla;
 		chess_table->scale=0.8;
 		
+
+		/*	LOAD MAN	*/
+		GLTexture bag, character;
+		bag.Load("Bag.bmp");
+		character.Load("BMan.bmp");
+		man = new Model_3DS();
+		man->Load("Man.3DS");
+		man->Materials[2].tex = bag;
+		man->Materials[1].tex = character;
+		man->scale = 7;
+		
 	}
 
 	static void MAKE_LISTS(){
@@ -157,6 +168,139 @@ public:
 		chess_table->Draw();
 		glEndList();
 
-		/*	CHESS CHAIR LIST	*/
+		/*	MAN LIST	*/
+		man_list = glGenLists(1);
+		glNewList(man_list, GL_COMPILE);
+		man->Draw();
+		glEndList();
+
+
+		/*	SPACE BOX LIST	*/
+		space_box_list = glGenLists(1);
+		glNewList(space_box_list, GL_COMPILE);
+		Centered_Cube(4000,4000,2600*11).draw_textured(space);
+		glEndList();
+
+		/*	BASIC CARRIAGE LIST*/
+		Centered_Cube main_body(800,1000,2600);
+		basic_carriage_list = glGenLists(1);
+		glNewList(basic_carriage_list, GL_COMPILE);
+		main_body.get_bottom_face().draw_textured(floors);
+		main_body.get_deep_face().draw_textured(front_train);
+		main_body.get_front_face().draw_textured(front_train);
+		glColor3ub(175, 175,175);
+		main_body.get_top_face().draw_textured(roof);
+		glEndList();
+
+		/*	DRAW DINNER CHAIRS LIST	*/
+		dinner_chairs_list = glGenLists(1);
+		glNewList(dinner_chairs_list, GL_COMPILE);
+		glPushMatrix();
+		glTranslated(-130, 100,-100);
+		glPushMatrix();
+		glScaled(2, 1.6, 1);
+		dinner_chair->Draw();
+		glPopMatrix();		
+		glTranslated(170, 0, 0);
+		glPushMatrix();
+		glScaled(2, 1.6, 1);
+		dinner_chair->Draw();
+		glPopMatrix();		glPopMatrix();
+		glEndList();
+		
+
+		/*	draw_table_with_chairs_list	*/
+		draw_table_with_chairs_list = glGenLists(1);
+		glNewList(draw_table_with_chairs_list, GL_COMPILE);
+		glPushMatrix();
+		glCallList(dinner_chairs_list);
+		glTranslated(-91, 0, 0);
+		glRotated(180, 0, 1, 0);
+		glCallList(dinner_chairs_list);
+		glPopMatrix();
+		glPushMatrix();
+		glScaled(1, 1.8,1);
+		Color::show(WHITE);
+		glPushMatrix();
+
+		// CROSS BRACE
+		glRotated(90, 0, 1, 0);
+		Centered_Cube(12, 7.5, 60).draw_textured(grayish);
+		glRotated(90, 0, 1, 0);
+		Centered_Cube(12, 7.5, 60).draw_textured(grayish);
+
+		// SHAFT
+		Centered_Cube(10, 0.6*150, 10).draw_textured(grayish);
+
+
+		// transition to second pair
+		glTranslated(95, 0, 0);
+
+		// CROSS BRACE 2
+		glRotated(90, 0, 1, 0);
+		Centered_Cube(12, 7.5, 60).draw_textured(grayish);
+		glRotated(90, 0, 1, 0);
+		Centered_Cube(12, 7.5, 60).draw_textured(grayish);
+
+		// SHAFT 2
+		Centered_Cube(10, 0.6*150, 10).draw_textured(grayish);
+
+		// transition to MIDDLE and UP
+		glTranslated(95/2, 0.6*150 + 0, 0);
+
+		// TABLE TABLE
+		glColor4ub(175,175,175, 255);
+		Centered_Cube(300, 8, 200).draw_textured(dinner_table);
+		Color::show(WHITE);
+
+		// POP & EXIT
+		glPopMatrix();
+		Color::show(WHITE);
+
+
+		glPopMatrix();
+		glPushMatrix();
+		glTranslated(-50,1.15*150,0);
+		glCallList(flower_vase_list);
+		glPopMatrix();
+		glEndList();
+
+
+		/*	CHESS BOARD LIST	*/
+		chess_board_list = glGenLists(1);
+		glNewList(chess_board_list, GL_COMPILE);
+		//CHESS BOARD BASE
+		Color::show(WHITE);
+		Centered_Cube(4000, 200, 4000).draw_textured(wood2);
+		glTranslated(0.0, 150, 0.0);
+
+		//CHESS BOARD FRUSTUM
+		Color::show(WHITE);
+		Frustum(4000, 450, 4000, 500).draw_textured(wood2);
+		glTranslated(0.0, 450, 0.0);
+		Color::show(WHITE);
+		int a[6] = {NULL, NULL, NULL, chess, NULL, NULL};
+		Centered_Cube(2800, 80, 2800).draw_texturedS(a);
+
+		//CHESS BOARD EDGE
+		glPushMatrix();
+		glTranslated(-1500, 0, -1400);
+		Cube(100, 80, 2800).draw_textured(wood);
+		glRotated(90, 0, 1, 0);
+		Cube(100, 80, 3000).draw_textured(wood);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(1400, 0, -1400);
+		Cube(100, 80, 2800).draw_textured(wood);
+		glTranslated(100, 0, 2800);
+		glRotated(-90, 0, 1, 0);
+		Cube(100, 80, 3000).draw_textured(wood);
+		glPopMatrix();
+		glTranslated(0, -650, 0);
+		glTranslated(-1400+(175), 740, -1400+(175));
+		Color::show(WHITE);
+		glEndList();
 	}
+
 };
