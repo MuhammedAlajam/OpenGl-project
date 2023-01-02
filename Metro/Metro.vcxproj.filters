@@ -95,6 +95,9 @@
     <ClInclude Include="Axis_control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="train_ceiling.bmp">

@@ -55,11 +55,12 @@ void draw_dinner_chairs();
 void draw_table_with_chairs();
 Passenger_Carriage pc;
 Kitchen_Carriage kc;
-Centered_Cube box = Centered_Cube(4000,4000,pc.depth*11);
+Centered_Cube box (4000,4000,2600*11);
 void draw_space(){
 	ac.push_matrix(); 
 	ac.translate(0, 0, -((pc.depth*11)/2)+pc.depth*1.8);
-	box.draw_textured(space);
+	glCallList(space_box_list);
+	box.hitbox();
 	ac.pop_matrix();
 }
 Chess_Carriage cc;
@@ -77,10 +78,14 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 	camera.look();
 	keyboard(); 
 	draw_space();
-	pc.draw(); 
-	ac.translate(0, 2000,0);
-	pc.draw();
 
+	cc.draw(); 
+	
+	glCallList(man_list);
+
+	if(keys['H']){
+		Sound::make_sound();
+	}	
 	frames++;
 	return 1;
 }

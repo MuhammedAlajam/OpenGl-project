@@ -45,7 +45,7 @@ bool find_point(Point p1, Point p2, Point p3, Point p4, Point p)
 }
 
 
-
+	
 class Rect : public entity{
 public:
 	// Method to draw the rectangle using legacy OpenGL
@@ -86,6 +86,8 @@ public:
 		if(find_point(p1, p2, p3, p4, camera_point) != find_point(p1, p2, p3, p4, virt_camera_point))
 			canMove = false; 
 	}
+
+	
 };
 
 
@@ -274,6 +276,7 @@ public:
 
 		front_face.draw();
 
+		bottom_face.checkMove();
 		bottom_face.draw();
 
 		deep_face.draw();
@@ -325,6 +328,38 @@ public:
 		left_face.draw_textured(texture);
 
 		
+	}
+
+	void hitbox(){
+		get_bottom_face().checkMove();
+	}
+
+	void draw_untethered(){
+		Rect front_face = get_front_face(); // 0 
+
+		Rect bottom_face = get_bottom_face(); // 1
+
+		Rect deep_face = get_deep_face(); // 2
+
+		Rect top_face = get_top_face(); // 3
+
+		Rect right_face = get_right_face(); //4 
+
+		Rect left_face = get_left_face(); //5
+
+
+
+		front_face.draw();
+
+		bottom_face.draw();
+
+		deep_face.draw();
+
+		top_face.draw();
+
+		right_face.draw();
+
+		left_face.draw();
 	}
 
 	void draw_texturedS(int textures[6])

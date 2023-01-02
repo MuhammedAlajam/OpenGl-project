@@ -87,6 +87,7 @@
     <ClInclude Include="rect.h" />
     <ClInclude Include="setup_textures.h" />
     <ClInclude Include="skybox.h" />
+    <ClInclude Include="sound.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="TgaLoader.h" />
