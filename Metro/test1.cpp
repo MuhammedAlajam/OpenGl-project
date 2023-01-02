@@ -1,7 +1,6 @@
 #include "top.h"
 
-
-const float step =2.0f;
+const float step =1.0f;
 const float y_angle = 0.001;
 const float x_angle = 0.0005;
 
@@ -45,14 +44,7 @@ void keyboard(){
 	}
 
 }
-void chair();
-void draw_chairs();
-void draw_chairs_column();
-void draw_tree();
-void draw_dinner_chair();
-void table();
-void draw_dinner_chairs();
-void draw_table_with_chairs();
+
 Passenger_Carriage pc;
 Kitchen_Carriage kc;
 Centered_Cube box (4000,4000,2600*11);
@@ -63,29 +55,37 @@ void draw_space(){
 	box.hitbox();
 	ac.pop_matrix();
 }
+
+void verify_movement(){
+	if(canMove || keys['P']){
+		camera.m_position.x =virt_cam.m_position.x; 
+		camera.m_position.z =virt_cam.m_position.z; 
+		camera.m_direction = virt_cam.m_direction;
+	}
+}
 Chess_Carriage cc;
 int x = 0;
 int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	ac.init(); 
+	ac.init();
 
-	if(canMove || keys['P']){
-		camera.m_position = virt_cam.m_position; 
-		camera.m_direction = virt_cam.m_direction;
-	}
+	verify_movement();
+
 	camera.look();
 	keyboard(); 
+
 	draw_space();
 
 	cc.draw(); 
-	
-	glCallList(man_list);
+
+	//glCallList(man_list);
 
 	if(keys['H']){
-		Sound::make_sound();
+		Sound::make_sound(bell_sound);
 	}	
+
 	frames++;
 	return 1;
 }
