@@ -368,6 +368,18 @@ public:
 		for(int i = 0; i < v.size(); i++){
 			if(textures[i]!=NULL)
 			v[i].draw_textured(textures[i]);
+			if(i == 1)
+				v[i].checkMove();
+			//else v[i].draw();
+		}
+	}
+	void draw_texturedS_raw(int textures[6])
+	{
+		std::vector<Rect> v = get_all();
+		for(int i = 0; i < v.size(); i++){
+			if(textures[i]!=NULL)
+			v[i].draw_textured(textures[i]);
+			
 			//else v[i].draw();
 		}
 	}

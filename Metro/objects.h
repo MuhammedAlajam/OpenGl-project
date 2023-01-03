@@ -4,13 +4,13 @@
 	ac.translate(0,0,-5);
 	Frustum(92.5*2,30,80, 4).draw_textured(cushion);
 	ac.pop_matrix();
-	Centered_Cube(105*2,-48,110).draw_textured(reflective_metal);
+	Centered_Cube(100*2,-48,110).draw_textured(reflective_metal);
 	ac.push_matrix();
 	ac.translate(0, 0, -40);
 	Centered_Cube(95*2, 120, -30).draw_textured(cushion);
 	ac.translate(0, -14, -24);
 	Color::show(WHITE);
-	Centered_Cube(105*2, 150, -18).draw_textured(reflective_metal);
+	Centered_Cube(100*2, 150, -18).draw_textured(reflective_metal);
 	ac.pop_matrix();
 }
 void draw_chairs(){

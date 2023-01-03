@@ -44,7 +44,7 @@ public:
 		stamp = Centered_Cube(width, 4*height/12, depth);
 		stamp.get_left_face().draw_textured(window_top_train);
 		stamp.get_right_face().draw_textured(window_top_train);
-		glColor4ub(0,0,0, 175);
+		glColor4ub(0,0,0, 100);
 		Color::show(WHITE);
 		ac.pop_matrix();
 	}
@@ -82,6 +82,7 @@ public:
 	}
 
 };
+
 class Kitchen_Carriage : public Basic_Carriage{
 public:
 	void draw(){
@@ -119,17 +120,14 @@ public:
 		ac.pop_matrix();
 		ac.pop_matrix();
 
-		
+
 	}
-	 void draw_table_with_chairs(){
+	void draw_table_with_chairs(){
 		glCallList(draw_table_with_chairs_list);
 	}
-	
-	 void draw_dinner_chairs(){
+
+	void draw_dinner_chairs(){
 		glCallList(dinner_chairs_list);
-	}
-	 void table(){
-		
 	}
 };
 
@@ -142,7 +140,7 @@ public:
 		chess_chair_hitbox = Centered_Cube(340, 200, 320);
 		end_table_hitbox = Centered_Cube(220, 300, 220);
 	}
-	
+
 	void draw(){
 
 		private_draw();
@@ -191,8 +189,8 @@ public:
 
 		// figurine deco
 		glCallList(figurine_list);
-		
-		
+
+
 		ac.pop_matrix();
 
 		// draw end table two
@@ -201,15 +199,188 @@ public:
 		end_table_hitbox.hitbox();
 		glCallList(end_table_list);
 		ac.translate(0, 310, 5);
-		
+
 		// plate for deco
 		glCallList(plate_list);
 
 		ac.pop_matrix();
 
+		if(keys['T']){
+			Sound::make_sound(bell_sound);
+		}
+
 	}
 	void draw_chessboard(){
 		glCallList(chess_board_list);
 	}
+
+};
+
+class Driver_Carriage:public Basic_Carriage{
+public:
+	Centered_Cube bottom_front_window, top_front_window;
+
+	Driver_Carriage(){
+		bottom_front_window = Centered_Cube(width, 2*height/5, depth);
+		top_front_window = Centered_Cube(width, 3*height/5, depth);
+	}
+
+	void draw(){
+		private_draw();
+		glColor3ub(115, 115,117);
+		ac.push_matrix();
+		ac.translate(-main_body.width/2 + main_body.width/16,0,(-main_body.depth/2) + 40);
+		Centered_Cube(main_body.width/8, main_body.height, 80).draw();
+		ac.pop_matrix();
+		ac.push_matrix();
+		ac.translate(-(-main_body.width/2 + main_body.width/16),0,(-main_body.depth/2) + 40);
+		Centered_Cube(main_body.width/8, main_body.height, 80).draw();
+		ac.pop_matrix();
+
+		// DRAW CENTER CONSOLE
+		ac.translate(0,0,(-main_body.depth/2) + 60);
+		Color::show(WHITE);
+		Centered_Cube(width - (main_body.width/4), bottom_front_window.height -40, 120).draw();
+
+		//	DRAW DRIVER CHAIR
+		ac.push_matrix();
+		glRotated(180, 0, 1, 0);
+		ac.translate(0, 100, -500);
+		glScaled(1.4, 1.4, 1.4);
+		chair();
+		ac.pop_matrix();
+		Color::show(WHITE);
+	}
+
+	void private_draw(){
+		Color::show(WHITE);
+		main_body.get_bottom_face().checkMove();
+		main_body.get_bottom_face().draw_textured(floors);
+		main_body.get_deep_face().draw_textured(front_train);
+
+		// DRAW DRIVER WINDOW
+
+		bottom_front_window.get_front_face().draw_textured(window_bottom_train);
+		ac.push_matrix();
+		ac.translate(0, bottom_front_window.height, 0);
+		glColor4ub(0, 0, 60, 102);
+		top_front_window.get_front_face().draw();
+		Color::show(WHITE);
+		ac.pop_matrix();
+
+		// DRAW ROOF
+		glColor3ub(175, 175,175);
+		main_body.get_top_face().draw_textured(roof);
+		Color::show(WHITE);
+
+		draw_sides();
+	}
+};
+
+class Football_Carriage:public Basic_Carriage{
+public:
+	bool sound;
+	Centered_Cube main_body, sofa_hitbox_1, sofa_hitbox_2;
+	Football_Carriage(){
+		main_body = Centered_Cube(width, height, depth);
+		sofa_hitbox_1 = Centered_Cube(300, 200, 200);
+		sofa_hitbox_2 = Centered_Cube(500, 200, 200);
+		sound = false;
+	}
+	void draw(){
+		int a[]  = {wall2, wall2, wall2, wall2, wall2, wall2};
+		main_body.draw_texturedS(a);
+		////cenama carriage
+		ac.push_matrix();
+		ac.translate(-200, 120, -700);
+		sofa();
+
+		// add table and tv
+		ac.push_matrix();
+		ac.translate((width/2)+80, 0, 100);
+		tablee();
+		Tv();
+		ac.pop_matrix();
+
+
+
+		//setup sofa hit box
+		ac.push_matrix();
+		ac.translate(40,40,-200);
+		sofa_hitbox_1.hitbox();
+		ac.translate(-340/2,0,400);
+		glRotated(90, 0, 1, 0);
+		sofa_hitbox_2.hitbox();
+		ac.pop_matrix();
+
+		//Cube(100, 100, -400).draw();
+		ac.translate(0, 0, 900);
+		sofa();
+
+		//insert table and tv
+		ac.push_matrix();
+		ac.translate((width/2)+80, 0, 100);
+		tablee();
+		Tv();
+		ac.pop_matrix();
+
+		//setup sofa hit box
+		ac.push_matrix();
+		ac.translate(40,40,-200);
+		sofa_hitbox_1.hitbox();
+		ac.translate(-340/2,0,350);
+		glRotated(90, 0, 1, 0);
+		sofa_hitbox_2.hitbox();
+		ac.pop_matrix();
+
+		Color::show(WHITE);
+		ac.pop_matrix();
+
+		audio();
+		}
 	
+
+	void audio(){
+			if(keys['T']){
+
+				if(sound )
+					Sound::make_sound("sounds/sheel.wav");
+				else Sound::make_sound("sounds/commentary.wav");
+				sound = !sound;
+			}}
+
+	void carrageeAndImageOnWall()
+	{
+		glTranslated(0,40,-500);
+		glPushMatrix();
+		Centered_Cube cubee(800,1000,2600);
+		int a[] = {wall2, wall2, wall2, wall2, wall2, wall2};
+		cubee.draw_texturedS(a);
+		glPopMatrix();
+
+
+		glPushMatrix();
+		glTranslated(599/2,500,1000/2);
+		Centered_Cube PhotoRight(200,200,-300);
+		PhotoRight.get_right_face().draw_textured(football1);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(1/2,500,-1000/2);
+		Centered_Cube PhotoLeft(250,250,-350);
+		PhotoLeft.get_left_face().draw_textured(football2);
+		glPopMatrix();
+	}
+	void sofa(){
+		glCallList(sofa_list);
+	}
+	void tablee()
+	{
+
+		glCallList(tablee_list);
+	}
+	void Tv()
+	{
+		glCallList(tv_list);
+	}
 };

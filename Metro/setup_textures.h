@@ -1,11 +1,14 @@
-static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table, roof;
+static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table, roof, driver_console_face, wood3, wall2, wall1, football1, football2;
+
 
 
 // DEFINE MODELS
 Model_3DS *tree, *palm_tree, *tundra_tree, *grass, *dinner_chair, *flower_vase, *chess_table, *man, *chess_clock, *chess_chair, *end_table, *figurine, *plate;
+Model_3DS sofa3 , table,vase1,tv,lamp ;
 
 // DEFINE LISTS
-GLuint dinner_chair_list, flower_vase_list, chess_table_list, man_list, space_box_list, basic_carriage_list, dinner_chairs_list, draw_table_with_chairs_list, chess_board_list, chess_chairs_list, chess_clock_list, end_table_list, figurine_list, plate_list;
+GLuint dinner_chair_list, flower_vase_list, chess_table_list, man_list, space_box_list, basic_carriage_list, dinner_chairs_list, draw_table_with_chairs_list, chess_board_list, chess_chairs_list, chess_clock_list, end_table_list, figurine_list, plate_list, tablee_list,
+	sofa_list, tv_list;
 
 class Texture{
 public:
@@ -14,15 +17,15 @@ public:
 	static void LOAD_TEXTURES(){
 		sky = LoadTexture("mountain.bmp");
 		wood = LoadTexture("wood.bmp");
-		/*back = LoadTexture("back.bmp");
-		top = LoadTexture("top.bmp",255);*/
+		back = LoadTexture("back.bmp");
+		top = LoadTexture("top.bmp",255);
 		space = LoadTexture("space.bmp",255);
-		/*front = LoadTexture("front.bmp",255);
+		front = LoadTexture("front.bmp",255);
 		brick = LoadTexture("brick.bmp",255);
 		left = LoadTexture("left.bmp",255);
 		right = LoadTexture("right.bmp",255);
 		one = LoadTexture("one.bmp",255);
-		two = LoadTexture("two.bmp",255);*/
+		two = LoadTexture("two.bmp",255);
 		floors = LoadTexture("floors.bmp",255);
 		front_train = LoadTexture("front_train.bmp",255);
 		back_train = LoadTexture("back_train.bmp",255);
@@ -47,6 +50,33 @@ public:
 		lake_left  = LoadTexture("lake_left.bmp");
 		lake_front  = LoadTexture("lake_front.bmp");
 		dinner_table = LoadTexture("dinner_table.bmp");
+		//driver_console_face = LoadTexture("driver_console_face.bmp");
+		wood3 = LoadTexture("wood3.bmp",255);
+		football1 = LoadTexture("football1.bmp",255);
+		football2 = LoadTexture("football2.bmp",255);
+		wall1 = LoadTexture("image//1.bmp",255);
+		wall2 = LoadTexture("image//2.bmp",255);
+
+
+		/*	DESERT ENVIRONMENT	*/
+		
+			desert[0] = LoadTexture("skybox/desert/desert_front.bmp"),
+			desert[1] =LoadTexture("skybox/desert/desert_bottom.bmp"),
+			desert[2] =LoadTexture("skybox/desert/desert_back.bmp"),
+			desert[3] =LoadTexture("skybox/desert/desert_top.bmp"),
+			desert[4] =LoadTexture("skybox/desert/desert_right.bmp"),
+			desert[5] =LoadTexture("skybox/desert/desert_left.bmp");
+		
+
+		/*	TUNDRA ENVIRONMENT	*/
+		tundra[0] = 
+			LoadTexture("skybox/tundra/tundra_front_back.bmp"),
+			tundra[1] = LoadTexture("skybox/tundra/tundra_bottom.bmp"),
+			tundra[2] = LoadTexture("skybox/tundra/tundra_front_back.bmp"),
+			tundra[3] = LoadTexture("skybox/tundra/tundra_top.bmp"),
+			tundra[4] = LoadTexture("skybox/tundra/tundra_sides.bmp"),
+			tundra[5] = LoadTexture("skybox/tundra/tundra_sides.bmp");
+		
 	}
 
 	static void MAKE_MODELS(){
@@ -197,6 +227,40 @@ public:
 		plate->scale = 6;
 		plate->Materials[0].tex = plate_wood;
 		plate->Materials[1].tex = plate_basket;
+
+		/******************************************************/
+		/*	FOOTBALL CARRIAGE	*/
+		//Models
+		//sofa
+		sofa3.Load((char*)"image\\Sofa N220519.3ds");
+		sofa3.Materials[0].tex.Load((char*)"image\\leat sml.bmp");
+		sofa3.Materials[1].tex.Load((char*)"image\\text_flw.bmp");
+		sofa3.Materials[2].tex.Load((char*)"image\\124.bmp");
+		sofa3.scale = 4;
+		sofa3.rot.y = 90;
+
+		//table 
+		table.Load((char*)"image\\Table BZarchitect Table 2 N271022.3ds");
+		table.Materials[0].tex.Load((char*)"image\\leat sml.bmp");		
+		table.scale = 0.9;
+		table.rot.y = 90;
+		//vasa abov table
+		  vase1.Load((char*)"image//Vase flowers Lily Pink N230118.3DS");
+		  vase1.Materials[0].tex.Load((char*)"image//leat sml.bmp");
+		  vase1.Materials[1].tex.Load((char*)"image//L1.bmp");
+		  vase1.Materials[2].tex.Load((char*)"image//leat sml.bmp");
+		  vase1.Materials[4].tex.Load((char*)"image//nono.bmp");
+		  vase1.Materials[5].tex.Load((char*)"image//L1.bmp");
+		  vase1.Materials[6].tex.Load((char*)"image//lily pin.bmp");
+		  vase1.Materials[7].tex.Load((char*)"image//lily pin.bmp");
+
+		  //Tv
+		  tv.Load((char*)"image//TV set PHILIPS N300615.3DS");
+		  tv.Materials[2].tex.Load((char*)"image//124.bmp");
+		  tv.Materials[1].tex.Load((char*)"image//124.bmp");
+		  tv.Materials[4].tex.Load((char*)"image//messi1.bmp");
+		  tv.scale = 0.9;
+		  tv.rot.y = 270;
 }
 
 	static void MAKE_LISTS(){
@@ -398,6 +462,27 @@ public:
 		glNewList(plate_list, GL_COMPILE);
 			glRotated(70,0,1,0);
 			plate->Draw();
+		glEndList();
+		/*	SOFA LIST	*/
+		sofa_list = glGenLists(1);
+		glNewList(sofa_list, GL_COMPILE);
+		/*sofa3.pos.x = 200/2;
+		sofa3.pos.y =80;
+		sofa3.pos.z = -1000/2;*/
+		sofa3.Draw();
+		glEndList();
+
+		/*	TABLEE LIST	*/
+		tablee_list = glGenLists(1);
+		glNewList(tablee_list, GL_COMPILE);
+		table.Draw();
+		glEndList();
+
+		/* TV LIST	*/
+		tv_list = glGenLists(1);
+		glNewList(tv_list, GL_COMPILE);
+			tv.Draw();
+
 		glEndList();
 	}
 };

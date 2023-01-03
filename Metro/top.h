@@ -18,12 +18,14 @@
 #include "Axis_control.h"
 #include "sound.h"
 
-Camera camera, virt_cam, third_cam;
+
+int desert[6], tundra[6];
+Camera camera, virt_cam, virt_cam2;;
 int mouseX = 0, mouseY = 0;
 bool isClicked = 0, isRClicked = 0;
 AxisControl ac = AxisControl(); 
 bool canMove = false;
-
+float movementHeight, increasing = 1;
 
 #include "basics.h"
 #include "setup_textures.h"
@@ -64,10 +66,8 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 {
-
-
 	// Set the initial position and direction of the camera
-	camera.setPosition( 0, 500, 2000);
+	camera.setPosition( 0, 500, 1);
 	camera.setDirection( 0.0f, 0.0f, -1.0f );
 	virt_cam.setPosition( 0, 500, 2000);
 	virt_cam.setDirection( 0.0f, 0.0f, -1.0f );
