@@ -1,4 +1,4 @@
-static int back, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table, roof, driver_console_face, wood3, wall2, wall1, football1, football2;
+static int back,train,cabinn_train, front, left, right, top, space, brick, one, two, floors, wood2, wood, sky, front_train, back_train, train_ceiling, chess, marble, ceiling_train, window_top_train, window_bottom_train, cushion, light_wood, reflective_metal, grayish, lake_ground, lake_right, lake_sky,lake_left, lake_front, dinner_table, roof, driver_console_face, wood3, wall2, wall1, football1, football2;
 
 
 
@@ -56,6 +56,8 @@ public:
 		football2 = LoadTexture("football2.bmp",255);
 		wall1 = LoadTexture("image//1.bmp",255);
 		wall2 = LoadTexture("image//2.bmp",255);
+		train = LoadTexture("train.bmp",255);
+		cabinn_train = LoadTexture("cabinn_train.bmp",255);
 
 
 		/*	DESERT ENVIRONMENT	*/
@@ -69,11 +71,10 @@ public:
 		
 
 		/*	TUNDRA ENVIRONMENT	*/
-		tundra[0] = 
-			LoadTexture("skybox/tundra/tundra_front_back.bmp"),
-			tundra[1] = LoadTexture("skybox/tundra/tundra_bottom.bmp"),
-			tundra[2] = LoadTexture("skybox/tundra/tundra_front_back.bmp"),
-			tundra[3] = LoadTexture("skybox/tundra/tundra_top.bmp"),
+		tundra[0] = LoadTexture("skybox/tundra/tundra_sides.bmp"),
+			tundra[1] = LoadTexture("skybox/tundra/tundra_sides.bmp"),
+			tundra[2] = LoadTexture("skybox/tundra/tundra_sides.bmp"),
+			tundra[3] = LoadTexture("skybox/tundra/tundra_sides.bmp"),
 			tundra[4] = LoadTexture("skybox/tundra/tundra_sides.bmp"),
 			tundra[5] = LoadTexture("skybox/tundra/tundra_sides.bmp");
 		

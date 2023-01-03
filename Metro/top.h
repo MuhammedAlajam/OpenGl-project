@@ -26,6 +26,16 @@ bool isClicked = 0, isRClicked = 0;
 AxisControl ac = AxisControl(); 
 bool canMove = false;
 float movementHeight, increasing = 1;
+GLfloat light_ambient[] = { 0, 0, 0, 1 };
+GLfloat light_diffuse[] = { 100, 100, 100, 0 };
+GLfloat light_specular[] = { 100, 100, 100, 0 };
+GLfloat light_position[] = { 150, 2000, 0, 1 };
+float mAmbient[] = {1.0,1.0,1.0,1};
+float mDiffuse[] = {1.0,1.0,1.0,1};
+float mSpecular[] = {0,0,0,1};
+float mShininess[] = {128};
+
+
 
 #include "basics.h"
 #include "setup_textures.h"
@@ -93,6 +103,25 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 	/*	setup lists	*/
 	Texture::MAKE_LISTS();
+
+
+
+
+	/* setup lighting */
+	glLightfv(GL_LIGHT1,GL_POSITION,light_position);
+  glLightfv(GL_LIGHT1,GL_AMBIENT,light_ambient);
+  glLightfv(GL_LIGHT1,GL_DIFFUSE,light_diffuse);
+  glLightfv(GL_LIGHT1,GL_SPECULAR,light_specular);
+  glMaterialfv(GL_FRONT,GL_AMBIENT,mAmbient);
+  glMaterialfv(GL_FRONT,GL_DIFFUSE,mDiffuse);
+  glMaterialfv(GL_FRONT,GL_SPECULAR,mSpecular);
+  glMaterialfv(GL_FRONT,GL_SHININESS,mShininess);
+  glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_LIGHT1);
+  glEnable(GL_LIGHTING);
+
+
+
 
 	return TRUE;										// Initialization Went OK
 }

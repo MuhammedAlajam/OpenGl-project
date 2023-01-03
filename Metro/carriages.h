@@ -13,6 +13,7 @@ public:
 		depth = 2600;
 		width = 800;
 		main_body = Centered_Cube(width, height, depth);
+		
 	}
 
 	void draw(){
@@ -218,11 +219,13 @@ public:
 
 class Driver_Carriage:public Basic_Carriage{
 public:
-	Centered_Cube bottom_front_window, top_front_window;
+	Centered_Cube bottom_front_window, top_front_window,trainn;
+	
 
 	Driver_Carriage(){
 		bottom_front_window = Centered_Cube(width, 2*height/5, depth);
 		top_front_window = Centered_Cube(width, 3*height/5, depth);
+		trainn = Centered_Cube (800,0,2600*11);
 	}
 
 	void draw(){
@@ -240,7 +243,7 @@ public:
 		// DRAW CENTER CONSOLE
 		ac.translate(0,0,(-main_body.depth/2) + 60);
 		Color::show(WHITE);
-		Centered_Cube(width - (main_body.width/4), bottom_front_window.height -40, 120).draw();
+		Centered_Cube(width - (main_body.width/4), bottom_front_window.height -40, 120).draw_textured(cabinn_train);
 
 		//	DRAW DRIVER CHAIR
 		ac.push_matrix();
@@ -256,6 +259,10 @@ public:
 		Color::show(WHITE);
 		main_body.get_bottom_face().checkMove();
 		main_body.get_bottom_face().draw_textured(floors);
+		glPushMatrix();
+		glTranslated(0,-5,-3000);
+		trainn.get_bottom_face().draw_textured(train);											///Mohmad Joma
+		glPopMatrix();
 		main_body.get_deep_face().draw_textured(front_train);
 
 		// DRAW DRIVER WINDOW

@@ -94,6 +94,9 @@
     <ClInclude Include="top.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Pictures\images\d\cabinn_train.bmp" />
+    <Image Include="..\..\..\..\Pictures\images\d\cabin_train.bmp" />
+    <Image Include="..\..\..\..\Pictures\images\d\train.bmp" />
     <Image Include="back.bmp" />
     <Image Include="back_train.bmp" />
     <Image Include="brick.bmp" />

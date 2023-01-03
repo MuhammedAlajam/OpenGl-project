@@ -1,8 +1,8 @@
 #include "top.h"
 
-const float step =2.0f;
-const float y_angle = 0.001;
-const float x_angle = 0.0005;
+const float step =10.0f;
+const float y_angle = 0.01;
+const float x_angle = 0.005;
 bool first_person = true;
 void keyboard(){
 
@@ -72,6 +72,10 @@ void draw_space(){
 	Color::show(BLACK);
 	Centered_Cube(6000, 4000, 500).draw();
 	Color::show(WHITE);
+	
+
+
+
 		break;
 	case 1:
 		ac.translate(0, 0, -2600*10/2 + z_movement);
@@ -86,7 +90,7 @@ void draw_space(){
 	//box.draw_textured(space);
 	//box.hitbox();
 	ac.pop_matrix();
-	z_movement += 0.6;
+	z_movement += 50;
 }
 
 void verify_movement(){
@@ -141,7 +145,7 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 	keyboard(); 
 	
 	draw_space();
-	
+
 	ac.push_matrix();
 	
 	ac.translate(0, 40, 0);
@@ -151,28 +155,28 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 		pc.draw(); 
 		break;
 	case 1:
-		pc.draw();
+		kc.draw();
 		break;
 	case 4:
 		pc.draw();
 		break;
 	case  2:
-		kc.draw();
+		cc.draw();
 		break;
 	case  3:
 		kc.draw();
 		break;
 	case 5:
-		cc.draw();
+		fc.draw();
 		break;
 	case 6:
-		cc.draw();
+		pc.draw();
 		break;
 	case 7: 
 		fc.draw();
 		break;
 	case 8: 
-		fc.draw();
+		cc.draw();
 		break;
 	case 9:
 		dc.draw();
@@ -183,11 +187,11 @@ int DrawGLScene(GLvoid)	// Here's Where We Do All The Drawing
 		break;
 	}
 
-	if(keys['H'] && camera.m_position.z <= -800 && frames%573 == 0){
+	if(keys['H'] && camera.m_position.z <= -800 && frames%200 == 0){
 		curr_carriage++;
 		reset_cam_pos();
 	}	
-	if(keys['H'] && camera.m_position.z >= 800 && frames%573 == 0){
+	if(keys['H'] && camera.m_position.z >= 800 && frames%200 == 0){
 		if(curr_carriage == 0){
 			curr_carriage = 9;
 		}else curr_carriage--;
